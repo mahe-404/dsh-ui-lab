@@ -12,10 +12,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: baseline-tolerance-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   linux-baseline:
     name: linux baseline + content/dpr variants
