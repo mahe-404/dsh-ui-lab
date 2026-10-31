@@ -1,0 +1,19 @@
+/* Issue #3 theme experiment: force a dark palette on the light desktop
+   fixture without changing layout. Baseline is the un-injected light run. */
+:root { color-scheme: dark; }
+html, body { background: #0f1115 !important; color: #e6edf3 !important; }
+.dsh-app, .dsh-main, .dsh-composer { background: #0f1115 !important; color: #e6edf3 !important; }
+.dsh-rail { background: #161b22 !important; border-color: #30363d !important; }
+.dsh-rail .mark { background: #e6edf3 !important; color: #0f1115 !important; }
+.dsh-rail .icon { border-color: #3d444d !important; }
+.dsh-list { background: #0d1117 !important; border-color: #30363d !important; }
+.dsh-list h2 { color: #8b949e !important; }
+.dsh-item { background: #161b22 !important; border-color: #30363d !important; }
+.dsh-item span { color: #8b949e !important; }
+.dsh-main h1, .dsh-main p { color: #e6edf3 !important; }
+.dsh-main p { color: #8b949e !important; }
+.dsh-composer { border-color: #30363d !important; box-shadow: none !important; }
+.dsh-composer .hint { color: #8b949e !important; }
+.dsh-pill { border-color: #30363d !important; color: #8b949e !important; }
+.dsh-send { background: #1f6feb !important; }
+footer { color: #8b949e !important; }

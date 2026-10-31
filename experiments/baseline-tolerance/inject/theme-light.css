@@ -1,0 +1,19 @@
+/* Issue #3 theme experiment: force the fixture's original light palette.
+   Used as the reverse direction: dark baseline vs light injection. */
+:root { color-scheme: light; }
+html, body { background: #fff !important; color: #1f2328 !important; }
+.dsh-app, .dsh-main, .dsh-composer { background: #fff !important; color: #1f2328 !important; }
+.dsh-rail { background: #f6f8fa !important; border-color: #d8dee4 !important; }
+.dsh-rail .mark { background: #1f2328 !important; color: #fff !important; }
+.dsh-rail .icon { border-color: #afb8c1 !important; }
+.dsh-list { background: #fbfcfd !important; border-color: #d8dee4 !important; }
+.dsh-list h2 { color: #57606a !important; }
+.dsh-item { background: #fff !important; border-color: #e4e8ec !important; }
+.dsh-item span { color: #6e7781 !important; }
+.dsh-main h1 { color: #1f2328 !important; }
+.dsh-main p { color: #57606a !important; }
+.dsh-composer { border-color: #d0d7de !important; box-shadow: 0 8px 24px rgb(31 35 40 / 6%) !important; }
+.dsh-composer .hint { color: #8c959f !important; }
+.dsh-pill { border-color: #d0d7de !important; color: #57606a !important; }
+.dsh-send { background: #a8c7fa !important; }
+footer { color: #8c959f !important; }

@@ -1,0 +1,87 @@
+name: baseline-tolerance
+
+# Issue LUgABeEEE/dsh-ui-lab#3 experiment: how much does --baseline diff% move
+# across OS, DPR, theme and dynamic content? This workflow only runs on the
+# experiment branch of the maintainer's fork; it never touches upstream.
+
+on:
+  push:
+    branches: [exp/baseline-tolerance]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: baseline-tolerance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux-baseline:
+    name: linux baseline + content/dpr variants
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: bash experiments/baseline-tolerance/run-linux.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ubuntu-baseline
+          path: work/base/linux
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-results
+          path: |
+            work/logs
+            work/base
+            work/fixtures
+          if-no-files-found: warn
+
+  compare:
+    name: compare on ${{ matrix.label }}
+    needs: linux-baseline
+    if: always() && needs.linux-baseline.result == 'success'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            label: windows
+          - os: macos-13
+            label: macos13
+          - os: macos-14
+            label: macos14
+    env:
+      LABEL: ${{ matrix.label }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - uses: actions/download-artifact@v4
+        with:
+          name: ubuntu-baseline
+          path: work/base/linux
+      - run: bash experiments/baseline-tolerance/run-compare.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ matrix.label }}-results
+          path: |
+            work/logs
+            work/base
+          if-no-files-found: warn

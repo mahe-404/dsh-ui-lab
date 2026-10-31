@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "phone-390x844-dpr1",
+      "label": "iPhone 13/14/15 (390×844 @1x experiment)",
+      "category": "phone",
+      "viewport": { "width": 390, "height": 844 },
+      "deviceScaleFactor": 1,
+      "isMobile": true,
+      "hasTouch": true,
+      "platform": "ios",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+      "notes": "Temporary DPR experiment profile; not part of the shipped set."
+    },
+    {
+      "id": "phone-390x844-dpr2",
+      "label": "iPhone 13/14/15 (390×844 @2x experiment)",
+      "category": "phone",
+      "viewport": { "width": 390, "height": 844 },
+      "deviceScaleFactor": 2,
+      "isMobile": true,
+      "hasTouch": true,
+      "platform": "ios",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+      "notes": "Temporary DPR experiment profile; not part of the shipped set."
+    },
+    {
+      "id": "phone-390x844-dpr3",
+      "label": "iPhone 13/14/15 (390×844 @3x experiment)",
+      "category": "phone",
+      "viewport": { "width": 390, "height": 844 },
+      "deviceScaleFactor": 3,
+      "isMobile": true,
+      "hasTouch": true,
+      "platform": "ios",
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+      "notes": "Temporary DPR experiment profile; not part of the shipped set."
+    }
+  ]
+}
