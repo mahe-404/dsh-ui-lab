@@ -73,15 +73,19 @@ compare "linux-theme-dark-control" shot --surface web --profile phone-390x844 \
   --baseline "$WORK/base/theme-dark" --diff-threshold 0 --json
 
 # --- C. dynamic content: relative time / caret / spinner / all --------------
+# Reruns deliberately use different --wait values: a real repeated matrix run
+# happens at an arbitrary wall-clock moment, not at the same animation phase.
 node "$EXP/scripts/make-variants.mjs" "$WORK/fixtures"
+MOTION_WAITS=(2500 4000 5000 6100)
 for variant in reltime caret spinner all; do
   MOTION="$(node -e "console.log(require('node:url').pathToFileURL('work/fixtures/${variant}.html').href)")"
   node src/cli.mjs shot --surface web --profile phone-390x844 --url "$MOTION" \
     --out "$WORK/out/motion-${variant}-base" --save-baseline "$WORK/base/motion-${variant}" --json \
     > "$WORK/logs/motion-${variant}-base.json" 2> "$WORK/logs/motion-${variant}-base.err"
-  for r in 1 2 3; do
+  for r in 1 2 3 4; do
     compare "motion-${variant}-rerun-$r" shot --surface web --profile phone-390x844 \
       --url "$MOTION" --out "$WORK/out/motion-${variant}-rerun-$r" \
+      --wait "${MOTION_WAITS[$((r - 1))]}" \
       --baseline "$WORK/base/motion-${variant}" --diff-threshold 0 --json
   done
 done

@@ -11,7 +11,7 @@ Nothing here is intended for upstream. The branch `exp/baseline-tolerance` on
 
 | path | purpose |
 | --- | --- |
-| `.github/workflows/baseline-tolerance.yml` | ubuntu baseline + windows/macos-13/macos-14 comparison jobs |
+| `.github/workflows/baseline-tolerance.yml` | ubuntu baseline + windows/macos-14(ARM)/macos-15-intel comparison jobs (`macos-13` is retired; `macos-15-intel` is the current Intel x64 label) |
 | `run-linux.sh` | Linux capture matrix: static reruns, theme, motion variants, DPR |
 | `run-compare.sh` | Windows/macOS: cross-platform diff vs Ubuntu baseline, plus own-baseline control |
 | `scripts/summary.mjs` | flattens `shot`/`matrix` JSON into `RESULT` lines |
