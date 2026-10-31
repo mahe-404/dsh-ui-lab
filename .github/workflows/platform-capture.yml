@@ -1,0 +1,40 @@
+name: platform capture (issue #2)
+
+# Validation-only workflow used to collect real macOS (Intel + Apple Silicon) and
+# Linux numbers for LUgABeEEE/dsh-ui-lab#2. It is intentionally not part of the
+# PR that added Windows support; run it from this branch (`workflow_dispatch` or
+# a push to the branch).
+on:
+  workflow_dispatch:
+  push:
+    branches: [feat/issue2-platform-validation]
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    name: fixture capture (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-13, macos-14]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx playwright install chromium
+      - name: install Linux system libraries for Chromium
+        if: runner.os == 'Linux'
+        run: npx playwright install-deps chromium
+      - name: capture fixture shot / matrix / fonts
+        shell: bash
+        run: node scripts/issue2-capture.mjs --out-dir artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: platform-capture-${{ matrix.os }}
+          path: artifacts/
+          if-no-files-found: error
